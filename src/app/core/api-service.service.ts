@@ -30,6 +30,10 @@ export class ApiServiceService {
     return this.http.delete(this.baseUrl+`api/Departments/${id}`)
   }
 
+  sortDepartment(id: any){
+    return this.http.get(this.baseUrl+`api/Departments/${id}`)
+  }
+
   // School calls
 
   getSchools(){
@@ -49,6 +53,10 @@ export class ApiServiceService {
     return this.http.delete(this.baseUrl+`api/Schools/${id}`)
   }
 
+  sortSchool(id: any){
+    return this.http.get(this.baseUrl+`api/Schools/${id}`)
+  }
+
   // Student calls
   getStudents(){
     return this.http.get(this.baseUrl+'api/Students')
@@ -65,6 +73,10 @@ export class ApiServiceService {
 
   deleteStudent(id: any){
     return this.http.delete(this.baseUrl+`api/Students/${id}`)
+  }
+
+  sortStudent(id: any){
+    return this.http.get(this.baseUrl+`api/Students/${id}`)
   }
 
 }

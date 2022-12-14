@@ -1,3 +1,4 @@
+import { SafePropertyRead } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from 'app/core/api-service.service';
 
@@ -15,6 +16,9 @@ export class DepartmentsComponent implements OnInit {
   selectedDeptName: any;
   selectedSchoolId: any;
   selectedId: any;
+  sortId: any;
+  errorMsg: any;
+  sorted: any;
 
   constructor(
     private apiService: ApiServiceService
@@ -70,6 +74,19 @@ export class DepartmentsComponent implements OnInit {
     this.selectedDeptName = this.departmentList[selectedDepartmentId].name;
     this.selectedSchoolId = this.departmentList[selectedDepartmentId].schoolId;
 
+  }
+
+  sort(id){
+    this.loading = true;
+    this.apiService.sortDepartment(id).subscribe((res: any)=>{
+      this.loading = false;
+      console.log(res);
+      this.departmentList = [res];
+    },(error)=>{
+      this.loading = false;
+      this.errorMsg = error.title;
+      alert('Not Found')
+    })
   }
 
   submitEdit(){

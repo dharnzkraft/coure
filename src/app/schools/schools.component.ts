@@ -15,6 +15,8 @@ export class SchoolsComponent implements OnInit {
   selectedDeptName: any;
   selectedSchoolId: any;
   selectedId: any;
+  sortId: any;
+  errorMsg: any;
 
   constructor(
     private apiService: ApiServiceService
@@ -91,6 +93,19 @@ export class SchoolsComponent implements OnInit {
       this.getSchools();
     }, (error)=>{
       console.log(error)
+    })
+  }
+
+  sort(id){
+    this.loading = true;
+    this.apiService.sortSchool(id).subscribe((res: any)=>{
+      this.loading = false;
+      console.log(res);
+      this.schoolList = [res];
+    },(error)=>{
+      this.loading = false;
+      this.errorMsg = error.title;
+      alert('Not Found')
     })
   }
 

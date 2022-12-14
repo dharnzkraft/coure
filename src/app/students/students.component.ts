@@ -29,7 +29,9 @@ export class StudentsComponent implements OnInit {
   selectedPhoneNumber: any;
   selectedTitle: any;
   selectedDeptId: any;
+  sortId: any;
   p: number = 1;
+  errorMsg: any;
 
   constructor(
     private apiService: ApiServiceService
@@ -138,6 +140,18 @@ export class StudentsComponent implements OnInit {
   }
 
 
+  sort(id){
+    this.loading = true;
+    this.apiService.sortStudent(id).subscribe((res: any)=>{
+      this.loading = false;
+      console.log(res);
+      this.studentList = [res];
+    },(error)=>{
+      this.loading = false;
+      this.errorMsg = error.title;
+      alert('Not Found')
+    })
+  }
 
 
 
